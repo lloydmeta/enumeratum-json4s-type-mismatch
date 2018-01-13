@@ -1,6 +1,7 @@
 package foo
 
 import enumeratum.Json4s
+import enumeratum.values
 import foo.resource.{Device, TrafficLight}
 import org.json4s.{DefaultFormats, Formats}
 
@@ -18,7 +19,10 @@ object Json4sMain extends App {
                      device: Device
                    )
 
-  implicit val formats: Formats = DefaultFormats + Json4s.serializer(TrafficLight) + Json4s.serializer(Device)
+  implicit val formats: Formats =
+    DefaultFormats +
+      Json4s.serializer(TrafficLight) +
+      values.Json4s.serializer(Device)
 
   println("doin stuff...")
 }
