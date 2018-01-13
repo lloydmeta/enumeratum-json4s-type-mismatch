@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>foo</groupId>
+  <artifactId>enumeratum-json4s-type-mismatch</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>${project.artifactId}</name>
+  <description>enumeratum-json4s type mismatch</description>
+  <inceptionYear>2018</inceptionYear>
+
+  <properties>
+    <encoding>UTF-8</encoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <version.maven.scala.plugin>3.3.1</version.maven.scala.plugin>
+    <version.scala>2.12.4</version.scala>
+    <version.scala.compat>2.12</version.scala.compat>
+    <version.enumeratum-json4s>1.5.12</version.enumeratum-json4s>
+    <version.json4s-jackson>3.5.3</version.json4s-jackson>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${version.scala}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.beachape</groupId>
+      <artifactId>enumeratum-json4s_${version.scala.compat}</artifactId>
+      <version>${version.enumeratum-json4s}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json4s</groupId>
+      <artifactId>json4s-jackson_${version.scala.compat}</artifactId>
+      <version>${version.json4s-jackson}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/main/scala</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>${version.maven.scala.plugin}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <recompileMode>incremental</recompileMode>
+              <scalaCompatVersion>${version.scala.compat}</scalaCompatVersion>
+              <args>
+                <arg>-deprecation</arg>
+                <arg>-dependencyfile</arg>
+                <arg>${project.build.directory}/.scala_dependencies</arg>
+              </args>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
